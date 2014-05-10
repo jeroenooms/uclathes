@@ -1,0 +1,68 @@
+\documentclass[PhD]{uclathes}
+
+%useful packages
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[round]{natbib}
+\usepackage{fancyvrb}
+\usepackage[toc,page]{appendix}
+\usepackage{breakurl}
+
+%shorthand commands
+\input{shorthands}
+
+%hack for natbib
+\newcommand{\newblock}{}
+
+%trick for using same content file as chapter and article
+\newcommand{\maintitle}[1]{
+  \chapter{#1}
+}
+
+\title{Challenges of Scaling Embedded Scientific Computing}
+\author{Jeroen C.L. Ooms}
+\department{Statistics}
+\degreeyear{2014}
+
+\chair{Mark Hansen}
+\member{Jan de Leeuw}
+\member{Deborah Estrin}
+\member{Mark Handcock}
+
+\dedication{\textsl{To Elizabeth \ldots \\
+  who never gave up trying to understand what it is that I do}}
+                
+\acknowledgments{(Acknowledgments omitted for brevity.)}
+
+\vitaitem   {1974--1975}
+                {Campus computer center ``User Services'' programmer and
+                consultant, Stanford Center for Information Processing,
+                Stanford University, Stanford, California.}
+                
+\publication    {\textsl{MADHOUS Reference Manual.}
+                Stanford University, Dean of Student Affairs
+                (Residential Education Division), 1978.
+                Technical documentation for the MADHOUS
+                software system used to assign students to
+                on-campus housing.}
+                
+\abstract{foo bar}
+
+\begin {document}
+\makeintropages
+
+\input{../thesis/content.tex}
+
+\bibliographystyle{plainnat}
+\bibliography{../thesis/thesis}    % bibliography references
+
+
+\input{../thesis/content.tex}
+\bibliography{../opencpu-paper/thesis} 
+
+
+
+\end {document}
