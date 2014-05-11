@@ -14,6 +14,18 @@
 %shorthand commands
 \input{shorthands}
 
+%knitr style verbatim blocks
+\newenvironment{codeblock}{
+  \VerbatimEnvironment
+  \definecolor{shadecolor}{rgb}{0.95, 0.95, 0.95}\color{fgcolor}
+  \color{black}
+  \begin{kframe}
+  \begin{BVerbatim}
+}{
+  \end{BVerbatim}
+  \end{kframe}
+}
+
 %hack for natbib
 \newcommand{\newblock}{}
 
@@ -55,14 +67,10 @@
 \makeintropages
 
 \input{../thesis/content.tex}
+\input{../opencpu-paper/content.tex}
+
 
 \bibliographystyle{plainnat}
-\bibliography{../thesis/thesis}    % bibliography references
-
-
-\input{../thesis/content.tex}
-\bibliography{../opencpu-paper/thesis} 
-
-
+\bibliography{thesis}    % bibliography references
 
 \end {document}
