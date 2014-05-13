@@ -51,6 +51,7 @@
 
 %for smaller code syntax fonts
 \newcommand{\mycodesize}{
+  \setlength{\parskip}{-5mm}
   \footnotesize
 }
 

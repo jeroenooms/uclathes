@@ -205,8 +205,6 @@ When \R tries to allocate more memory than allowed, it will throw an error:
 \end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Failed to kill process. The pid or process group does not exist.}}
-
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\end{kframe}
 \end{knitrout}
 
@@ -244,9 +242,6 @@ kill the process after 5 seconds:
 \begin{alltt}
 \hlkwd{system.time}\hlstd{(x} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{cputest}\hlstd{(),} \hlkwc{RLIMIT_CPU} \hlstd{=} \hlnum{5}\hlstd{))}
 \end{alltt}
-
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Failed to kill process. The pid or process group does not exist.\\\#\# Warning: Failed to kill process. The pid or process group does not exist.}}
 
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\begin{verbatim}
 ## Timing stopped at: 4.846 0.175 5.102
