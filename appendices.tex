@@ -1,0 +1,355 @@
+
+%\begin{appendices}
+
+%report class wants \appendix instead
+\appendix
+\chapter{Example profiles}
+
+This appendix prints some of the example profiles that ship with the \RAppArmor
+package. To load them in \AppArmor, an ascii file with these rules needs to be
+copied to the \texttt{/etc/apparmor.d/} directory. After adding new profiles to
+this directory they can be loaded in the kernel by running \texttt{sudo service
+apparmor restart}. The \texttt{r-cran-rapparmor} package that can be build on
+Debian and Ubuntu does this automatically during installation. Once profiles
+have been loaded in the kernel, any user can apply them to an \R session using
+either the \texttt{aa\_change\_profile} or \texttt{eval.secure} function from
+the \texttt{RAppArmor} package.
+
+\section{Profile: \texttt{r-base}}
+\label{r-base}
+
+\begin{verbatim}
+#include <tunables/global>
+profile r-base {
+        #include <abstractions/base>
+        #include <abstractions/nameservice>
+
+        /bin/* rix,
+        /etc/R/ r,
+        /etc/R/* r,
+        /etc/fonts/** mr,
+        /etc/xml/* r,
+        /tmp/** rw,
+        /usr/bin/* rix,
+        /usr/lib/R/bin/* rix,
+        /usr/lib{,32,64}/** mr,
+        /usr/lib{,32,64}/R/bin/exec/R rix,
+        /usr/local/lib/R/** mr,
+        /usr/local/share/** mr,
+        /usr/share/** mr,
+}
+\end{verbatim}
+
+
+\section{Profile: \texttt{r-compile}}
+\label{r-compile}
+
+\begin{verbatim}
+#include <tunables/global>
+profile r-compile {
+        #include <abstractions/base>
+        #include <abstractions/nameservice>
+
+        /bin/* rix,
+        /etc/R/ r,
+        /etc/R/* r,
+        /etc/fonts/** mr,
+        /etc/xml/* r,
+        /tmp/** rmw,
+        /usr/bin/* rix,
+        /usr/include/** r,
+        /usr/lib/gcc/** rix,    
+        /usr/lib/R/bin/* rix,
+        /usr/lib{,32,64}/** mr,
+        /usr/lib{,32,64}/R/bin/exec/R rix,
+        /usr/local/lib/R/** mr,
+        /usr/local/share/** mr,
+        /usr/share/** mr,
+}
+\end{verbatim}
+
+\section{Profile: \texttt{r-user}}
+\label{r-user}
+
+\begin{verbatim}
+#include <tunables/global>
+profile r-user {
+        #include <abstractions/base>
+        #include <abstractions/nameservice>
+	
+        capability kill,
+        capability net_bind_service,
+        capability sys_tty_config,
+	
+        @{HOME}/ r,
+        @{HOME}/R/ r,
+        @{HOME}/R/** rw,
+        @{HOME}/R/{i686,x86_64}-pc-linux-gnu-library/** mrwix,
+        /bin/* rix,
+        /etc/R/ r,
+        /etc/R/* r,
+        /etc/fonts/** mr,
+        /etc/xml/* r,
+        /tmp/** mrwix,
+        /usr/bin/* rix,
+        /usr/include/** r,
+        /usr/lib/gcc/** rix,		
+        /usr/lib/R/bin/* rix,
+        /usr/lib{,32,64}/** mr,
+        /usr/lib{,32,64}/R/bin/exec/R rix,
+        /usr/local/lib/R/** mr,
+        /usr/local/share/** mr,
+        /usr/share/** mr,
+}
+\end{verbatim}
+
+
+
+\chapter{Security unit tests}
+
+This appendix prints a number of unit tests that contain malicious code and
+which should be prevented by any sandboxing tool.
+
+\section{Access system files}
+
+Usually \R has no business in the system logs, and these are not included in
+the profiles. The codechunk below attempts to read the syslog file.
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{readSyslog} \hlkwb{<-} \hlkwa{function}\hlstd{() \{}
+    \hlkwd{readLines}\hlstd{(}\hlstr{"/var/log/syslog"}\hlstd{)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+When executing this with the r-user profile, access to this file is denied,
+resulting in an error:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{eval.secure}\hlstd{(}\hlkwd{readSyslog}\hlstd{(),} \hlkwc{profile} \hlstd{=} \hlstr{"r-user"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\section{Access personal files}
+\label{creditcard}
+
+Access to system files can to some extend by prevented by running processes as
+non privileged users. But it is easy to forget that also the user's personal
+files can contain senstive information. Below a simple function that scans the
+\texttt{Documents} directory of the current user for files containing credit
+card numbers.
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{findCreditCards} \hlkwb{<-} \hlkwa{function}\hlstd{() \{}
+    \hlstd{pattern} \hlkwb{<-} \hlstr{"([0-9]\{4\}[- ])\{3\}[0-9]\{4\}"}
+    \hlkwa{for} \hlstd{(filename} \hlkwa{in} \hlkwd{dir}\hlstd{(}\hlstr{"~/Documents"}\hlstd{,} \hlkwc{full.names} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{recursive} \hlstd{=} \hlnum{TRUE}\hlstd{)) \{}
+        \hlkwa{if} \hlstd{(}\hlkwd{file.info}\hlstd{(filename)}\hlopt{$}\hlstd{size} \hlopt{>} \hlnum{1e+06}\hlstd{)}
+            \hlkwa{next}
+        \hlstd{doc} \hlkwb{<-} \hlkwd{readLines}\hlstd{(filename)}
+        \hlstd{results} \hlkwb{<-} \hlkwd{gregexpr}\hlstd{(pattern, doc)}
+        \hlstd{output} \hlkwb{<-} \hlkwd{unlist}\hlstd{(}\hlkwd{regmatches}\hlstd{(doc, results))}
+        \hlkwa{if} \hlstd{(}\hlkwd{length}\hlstd{(output)} \hlopt{>} \hlnum{0}\hlstd{) \{}
+            \hlkwd{cat}\hlstd{(}\hlkwd{paste}\hlstd{(filename,} \hlstr{":"}\hlstd{, output,} \hlkwc{collapse} \hlstd{=} \hlstr{"\textbackslash{}n"}\hlstd{),} \hlstr{"\textbackslash{}n"}\hlstd{)}
+        \hlstd{\}}
+    \hlstd{\}}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+This example prints the credit card numbers to the console, but it would be
+just as easy to post them to a server on the internet. For this reason the
+\texttt{r-user} profile denies access to the user's home dir, except for the
+\texttt{{\raise.17ex\hbox{$\scriptstyle\sim$}}/R} directory.
+
+
+\section{Limiting memory}
+
+When a system or service is used by many users at the same time, it is
+important that we cap the memory that can be used by a single process. The
+following function generates a large matrix:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{memtest} \hlkwb{<-} \hlkwa{function}\hlstd{() \{}
+    \hlstd{A} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlnum{1e+07}\hlstd{),} \hlnum{10000}\hlstd{)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+When \R tries to allocate more memory than allowed, it will throw an error:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{memtest}\hlstd{(),} \hlkwc{RLIMIT_AS} \hlstd{=} \hlnum{50} \hlopt{*} \hlnum{1024} \hlopt{*} \hlnum{1024}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: cannot allocate vector of size 76.3 Mb}}\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{memtest}\hlstd{(),} \hlkwc{RLIMIT_AS} \hlstd{=} \hlnum{500} \hlopt{*} \hlnum{1024} \hlopt{*} \hlnum{1024}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Failed to kill process. The pid or process group does not exist.}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\end{kframe}
+\end{knitrout}
+
+
+
+\section{Limiting CPU time}
+\label{cputime}
+
+Suppose we are hosting a web service and we want to kill jobs that do not
+finish within 5 seconds. Below is a snippet that will take much more than 5
+seconds to complete on most machines. Note that because \R calling out to
+\texttt{C} code, it will not be possible to terminate this function prematurely
+using R's \texttt{setTimeLimit} or even using \texttt{CTRL+C} in an interactive
+console. If this would happen inside of a bigger system, the entire service
+might become unresponsive.
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{cputest} \hlkwb{<-} \hlkwa{function}\hlstd{() \{}
+    \hlstd{A} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{rnorm}\hlstd{(}\hlnum{1e+07}\hlstd{),} \hlnum{1000}\hlstd{)}
+    \hlstd{B} \hlkwb{<-} \hlkwd{svd}\hlstd{(A)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+In RAppArmor we have actually two different options to deal with this. The first
+one is setting the \texttt{RLIMIT\_CPU} value. This will cause the kernel to
+kill the process after 5 seconds:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{system.time}\hlstd{(x} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{cputest}\hlstd{(),} \hlkwc{RLIMIT_CPU} \hlstd{=} \hlnum{5}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Failed to kill process. The pid or process group does not exist.\\\#\# Warning: Failed to kill process. The pid or process group does not exist.}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\begin{verbatim}
+## Timing stopped at: 4.846 0.175 5.102
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(x)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'x' not found}}\end{kframe}
+\end{knitrout}
+
+
+However, this is actually a bit of a harsh measure: because the kernel
+automatically terminates the process after 5 seconds we have no control over
+what should happen when this happens, nor can we throw an informative error.
+Setting \texttt{RLIMIT\_CPU} is a bit like starting a job with a
+self-destruction timer. A more elegant solution is to terminate the process
+from \R using the \texttt{timeout} argument from the \texttt{eval.secure}
+function. Because the actual job is processed in a fork, the parent process
+stays responsive, and is used to kill the child process.
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{system.time}\hlstd{(x} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{cputest}\hlstd{(),} \hlkwc{timeout} \hlstd{=} \hlnum{5}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 5 seconds. Terminating process.}}\begin{verbatim}
+## Timing stopped at: 0.001 0.002 5.003
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+One could even consider a Double Dutch solution by setting both \texttt{timeout}
+and a slightly higher value for \texttt{RLIMIT\_CPU}, so that if all else fails,
+the kernel will end up killing the process and its children.
+
+\section{Fork bomb}
+
+A fork bomb is a process that spawns many child processes, which often results
+in the operating system getting stuck to a point where it has to be rebooted.
+Performing a fork bomb in \R is quite easy and requires no special privileges:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{forkbomb} \hlkwb{<-} \hlkwa{function}\hlstd{() \{}
+    \hlkwa{repeat} \hlstd{\{}
+        \hlstd{parallel::}\hlkwd{mcparallel}\hlstd{(}\hlkwd{forkbomb}\hlstd{())}
+    \hlstd{\}}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+Do not call this function outside sandbox, because it will make the machine
+unresponsive. However, inside our sandbox we can use the \texttt{RLIMIT\_NPROC}
+to limit the number of processes the user is allowed to own:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{eval.secure}\hlstd{(}\hlkwd{forkbomb}\hlstd{(),} \hlkwc{RLIMIT_NPROC} \hlstd{=} \hlnum{100}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: unable to fork, possible reason: Resource temporarily unavailable}}\end{kframe}
+\end{knitrout}
+
+
+Note that the process count is based on the \Linux user. Hence if the same
+\Linux user already has a number of other processes, which is usually the case
+for non-system users, the cap has to be higher than this number. Also note that
+in some \Linux configurations, the root user is exempted from the
+\texttt{RLIMIT\_NPROC} limit.
+
+Different processes owned by a single user can enforce different \texttt{NPROC}
+limits, however in the actual process count all active processes from the
+current user are taken into account. Therefore it might make sense to create a
+separate Linux system user that is only used to process \R jobs. That way
+\texttt{RLIMIT\_NPROC} actually corresponds to the number of concurrent \R
+processes. The \texttt{eval.secure} arguments \texttt{uid} and \texttt{gid}
+can be used to switch Linux users before evaluating the call. E.g to add a
+system user in \Linux, run:
+
+\begin{codeblock}
+sudo useradd testuser --system -U -d/tmp -c"RAppArmor Test User"
+\end{codeblock}
+
+If the main \R process has superuser privileges, incoming call can be
+evaluated as follows:
+
+\begin{knitrout}\mycodesize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{eval.secure}\hlstd{(}\hlkwd{run_job}\hlstd{(),} \hlkwc{uid} \hlstd{=} \hlstr{"testuser"}\hlstd{,} \hlkwc{RLIMIT_NPROC} \hlstd{=} \hlnum{10}\hlstd{,} \hlkwc{timeout} \hlstd{=} \hlnum{60}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+%\end{appendices}

@@ -1,2 +1,8 @@
 .DS_Store
 .Rproj.user
+*.log
+*.lof
+*.lot
+*.toc
+*.synctex.gz
+*-concordance.tex
