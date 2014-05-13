@@ -65,10 +65,12 @@
 \department{Statistics}
 \degreeyear{2014}
 
+\chair{Frederick Schoenberg}
 \chair{Mark Hansen}
 \member{Jan de Leeuw}
-\member{Deborah Estrin}
 \member{Mark Handcock}
+\member{Sanjog Misra}
+
 
 \dedication{\textsl{To Elizabeth \ldots \\
   who never gave up trying to understand what it is that I do}}
