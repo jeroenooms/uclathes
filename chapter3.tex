@@ -1014,12 +1014,16 @@ At the installation of the package, this file is copied to
 \texttt{/etc/apparmor.d/}. This file is basically a copy of the \texttt{r-user}
 profile in appendix \ref{r-user}, however with a small change: where
 \texttt{r-user} defines a named profile with
+
+\footnotesize
 \begin{verbatim}
   profile r-user {
     ...
   }
 \end{verbatim}
 the \texttt{usr.bin.r} file defines a profile specific to a filepath:
+
+\footnotesize
 \begin{verbatim}
   /usr/bin/R {
     ...
