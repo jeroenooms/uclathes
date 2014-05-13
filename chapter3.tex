@@ -793,19 +793,19 @@ lower the priority of the process. In \RAppArmor the \texttt{getpriority} and
 \hlkwd{getpriority}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] 0
+[1] 0
 \end{verbatim}
 \begin{alltt}
 \hlkwd{setpriority}\hlstd{(}\hlnum{5}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 5
+[1] 5
 \end{verbatim}
 \begin{alltt}
 \hlkwd{system}\hlstd{(}\hlstr{"nice"}\hlstd{,} \hlkwc{intern} \hlstd{=} \hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## [1] "5"
+[1] "5"
 \end{verbatim}
 \begin{alltt}
 \hlkwd{setpriority}\hlstd{(}\hlnum{0}\hlstd{)}
@@ -825,19 +825,19 @@ with a certain priority without affecting the priority of the main \R session:
 \hlkwd{getpriority}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] 5
+[1] 5
 \end{verbatim}
 \begin{alltt}
 \hlkwd{eval.secure}\hlstd{(}\hlkwd{system}\hlstd{(}\hlstr{"nice"}\hlstd{,} \hlkwc{intern} \hlstd{=} \hlnum{TRUE}\hlstd{),} \hlkwc{priority} \hlstd{=} \hlnum{10}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## [1] "10"
+[1] "10"
 \end{verbatim}
 \begin{alltt}
 \hlkwd{getpriority}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] 5
+[1] 5
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -916,7 +916,7 @@ any side effects on the main process:
 \hlkwd{object.size}\hlstd{(A)}
 \end{alltt}
 \begin{verbatim}
-## 80000040 bytes
+80000040 bytes
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -990,7 +990,7 @@ single call, witout any side effects. The \texttt{eval.secure} function uses
 \hlkwd{nrow}\hlstd{(out)}
 \end{alltt}
 \begin{verbatim}
-## [1] 66
+[1] 66
 \end{verbatim}
 \begin{alltt}
 \hlstd{out} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{read.table}\hlstd{(}\hlstr{"/etc/passwd"}\hlstd{),} \hlkwc{profile} \hlstd{=} \hlstr{"testprofile"}\hlstd{)}

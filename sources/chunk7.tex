@@ -8,7 +8,7 @@
 \hlkwd{aa_change_profile}\hlstd{(}\hlstr{"r-base"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## Switching profiles...
+Switching profiles...
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -23,13 +23,13 @@ This profile denies access to most systems files and the home directory:
 \hlkwd{list.files}\hlstd{(}\hlstr{"/"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## character(0)
+character(0)
 \end{verbatim}
 \begin{alltt}
 \hlkwd{list.files}\hlstd{(}\hlstr{"~"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## character(0)
+character(0)
 \end{verbatim}
 \begin{alltt}
 \hlkwd{file.create}\hlstd{(}\hlstr{"~/test"}\hlstd{)}
@@ -37,13 +37,13 @@ This profile denies access to most systems files and the home directory:
 
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning: cannot create file '\textasciitilde{}/test', reason 'Permission denied'}}\begin{verbatim}
-## [1] FALSE
+[1] FALSE
 \end{verbatim}
 \begin{alltt}
 \hlkwd{list.files}\hlstd{(}\hlstr{"/tmp"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## character(0)
+character(0)
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -62,20 +62,20 @@ However the profile does grant access to the global library and temporary direct
 \hlkwd{dev.off}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## pdf 
-##   2
+pdf 
+  2
 \end{verbatim}
 \begin{alltt}
 \hlkwd{list.files}\hlstd{()}
 \end{alltt}
 \begin{verbatim}
-## [1] "test.pdf"
+[1] "test.pdf"
 \end{verbatim}
 \begin{alltt}
 \hlkwd{file.remove}\hlstd{(}\hlstr{"test.pdf"}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
-## [1] TRUE
+[1] TRUE
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
