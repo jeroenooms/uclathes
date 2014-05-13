@@ -523,7 +523,7 @@
   \@makesignaturepage
   \@makededication
   \tableofcontents
-  \listoffigures
+  %\listoffigures
   \listoftables
   \@makeacknowledgments
   \@makevitapage
