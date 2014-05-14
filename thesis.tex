@@ -50,11 +50,16 @@
 \usepackage{alltt}
 
 %This prevents chapter numbering
-%\makeatletter
-%\renewcommand{\thesection}{%
-%  \@arabic\c@section
-%}
-%\makeatother
+\makeatletter
+\renewcommand{\thesection}{%
+  \@arabic\c@section
+}
+\makeatother
+
+%\renewcommand\thechapter{[\arabic{chapter}]}
+
+%disable paragraph indentation
+\setlength{\parindent}{0pt}
 
 %useful packages
 \usepackage{url}
@@ -69,7 +74,7 @@
 \usepackage{breakurl}
 
 %make Bibliography appear in TOC
-\usepackage[nottoc,notlot,notlof]{tocbibind}
+%\usepackage[nottoc,notlot,notlof]{tocbibind}
 %\usepackage[nottoc,notlot,notlof,section]{tocbibind}
 
 %for 'sidewaystable' environment
@@ -132,7 +137,7 @@
                 
 \acknowledgments{
 
-This research would not have been possible without the help of many people. I would like to thank my adviser Mark Hansen and other committee members Jan de Leeuw, Deborah Estrin and Mark Handcock for giving me the confidence, support and liberty to pursue this somewhat unconventional interdisciplinary research. Their blessing and advice provided the perfect balance between guidance and creative freedom that allowed me to get the most out ouf my doctoral research. I thank Jan specifically for welcoming me at UCLA and personally making my California adventure possible. I am also grateful to my colleagues at Mobilize and OpenMHealth. Collaborating with these professional software developers was a big inspiration to my research and I thoroughly enjoy working with each of the individual team members. Elizabeth Torres has been very helpful with reviewing drafts of this thesis and contributed numerous suggestions for improvement. Finally a warm hug goes to our student affairs officer Glenda Jones for going above and beyond her duties to take care of the statistics students at UCLA. 
+This research would not have been possible without the help of many people. I would like to thank my adviser Mark Hansen and other committee members Jan de Leeuw, Deborah Estrin, Mark Handcock, Rick Schoenberg and Sanjog Misra for giving me the confidence, support and liberty to pursue this somewhat unconventional interdisciplinary research. Their blessing and advice provided the perfect balance between guidance and creative freedom that allowed me to get the most out ouf my doctoral research. I thank Jan specifically for welcoming me at UCLA and personally making my California adventure possible. I am also grateful to my colleagues at Mobilize and OpenMHealth. Collaborating with these professional software developers was a big inspiration to my research and I thoroughly enjoy working with each of the individual team members. Elizabeth Torres has been very helpful with reviewing drafts of this thesis and contributed numerous suggestions for improvement. Finally a warm hug goes to our student affairs officer Glenda Jones for going above and beyond her duties to take care of the statistics students at UCLA. 
 
 Then there are the countless members of the \texttt{R} community that generously provided valuable support, advice, feedback and criticism. In particular, much of the initial research builds on pioneering work and advice from Jeffrey Horner. Expertise from Dirk Eddelbuettel and Michael Rutter provided important foundations for developing software systems with \texttt{R} on Debian and Ubuntu systems. The RStudio folks, including Hadley Wickham, JJ Allaire, Joe Cheng and Yihui Xie have given lots of helpful technical support. Finally I would like to thank the many individuals and organizations that adopted the \texttt{OpenCPU} software, especially in the early stages. By investing their time and energy in my work they were an important source of feedback and motivation to keep improving the software. 
 

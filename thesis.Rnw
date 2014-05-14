@@ -1,11 +1,13 @@
 \documentclass[PhD]{uclathes}
 
 %This prevents chapter numbering
-%\makeatletter
-%\renewcommand{\thesection}{%
-%  \@arabic\c@section
-%}
-%\makeatother
+\makeatletter
+\renewcommand{\thesection}{%
+  \@arabic\c@section
+}
+\makeatother
+
+%\renewcommand\thechapter{[\arabic{chapter}]}
 
 %disable paragraph indentation
 \setlength{\parindent}{0pt}
@@ -23,7 +25,7 @@
 \usepackage{breakurl}
 
 %make Bibliography appear in TOC
-\usepackage[nottoc,notlot,notlof]{tocbibind}
+%\usepackage[nottoc,notlot,notlof]{tocbibind}
 %\usepackage[nottoc,notlot,notlof,section]{tocbibind}
 
 %for 'sidewaystable' environment
