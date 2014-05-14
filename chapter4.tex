@@ -790,12 +790,12 @@ The section on atomic vectors discussed two methods of encoding missing data app
 \begin{knitrout}\mycodesize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{x} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{TRUE}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{),} \hlkwc{bar} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Aladdin"}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlstr{"Mario"}\hlstd{))}
+\hlstd{x} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{foo} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{FALSE}\hlstd{,} \hlnum{TRUE}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{),} \hlkwc{bar} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Peach"}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlstr{"Mario"}\hlstd{))}
 \hlkwd{print}\hlstd{(x)}
 \end{alltt}
 \begin{verbatim}
     foo     bar
-1 FALSE Aladdin
+1 FALSE   Peach
 2  TRUE    <NA>
 3    NA    <NA>
 4    NA   Mario
@@ -807,7 +807,7 @@ The section on atomic vectors discussed two methods of encoding missing data app
 [
   {
     "foo" : false,
-    "bar" : "Aladdin"
+    "bar" : "Peach"
   },
   {
     "foo" : true
