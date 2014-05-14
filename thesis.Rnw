@@ -19,6 +19,10 @@
 \usepackage[toc,page]{appendix}
 \usepackage{breakurl}
 
+%make Bibliography appear in TOC
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+%\usepackage[nottoc,notlot,notlof,section]{tocbibind}
+
 %for 'sidewaystable' environment
 \usepackage{rotating}
 

@@ -1015,21 +1015,22 @@ At the installation of the package, this file is copied to
 profile in appendix \ref{r-user}, however with a small change: where
 \texttt{r-user} defines a named profile with
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
   profile r-user {
     ...
   }
 \end{verbatim}
-the \texttt{usr.bin.r} file defines a profile specific to a filepath:
+\end{footnotesize}
+The \texttt{usr.bin.r} file defines a profile specific to a filepath:
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
   /usr/bin/R {
     ...
    }
 \end{verbatim}
-
+\end{footnotesize}
 When using the latter syntax, the profile is automatically associated every
 time the file \texttt{/usr/bin/R} is executed (which is the script that runs
 when \R is started from the shell). This way we can set some default security

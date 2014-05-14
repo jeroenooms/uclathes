@@ -18,7 +18,7 @@ the \texttt{RAppArmor} package.
 \section{Profile: \texttt{r-base}}
 \label{r-base}
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
 #include <tunables/global>
 profile r-base {
@@ -40,12 +40,12 @@ profile r-base {
         /usr/share/** mr,
 }
 \end{verbatim}
-
+\end{footnotesize}
 
 \section{Profile: \texttt{r-compile}}
 \label{r-compile}
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
 #include <tunables/global>
 profile r-compile {
@@ -69,10 +69,12 @@ profile r-compile {
         /usr/share/** mr,
 }
 \end{verbatim}
+\end{footnotesize}
 
 \section{Profile: \texttt{r-user}}
 \label{r-user}
 
+\begin{footnotesize}
 \begin{verbatim}
 #include <tunables/global>
 profile r-user {
@@ -104,6 +106,7 @@ profile r-user {
         /usr/share/** mr,
 }
 \end{verbatim}
+\end{footnotesize}
 
 
 

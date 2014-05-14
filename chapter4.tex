@@ -379,12 +379,13 @@ $dim
 
 We expect this representation will be the most intuitive to interpret, also within languages that do not have a native notion of a matrix. Note that even though \R stores matrices in \emph{column major} order, \jsonlite encodes matrices in \emph{row major} order. This is a more conventional and intuitive way to represent matrices and is consistent with the row-based encoding of data frames discussed in the next section. When the \JSON string is properly indented (recall that white space and line breaks are optional in \JSON), it looks very similar to the way \R prints matrices:
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
 [ [ 1, 4, 7, 10 ], 
   [ 2, 5, 8, 11 ], 
   [ 3, 6, 9, 12 ] ]
 \end{verbatim}
+\end{footnotesize}
 
  Because the matrix is implemented in \R as an atomic vector, it automatically inherits the conventions mentioned earlier with respect to edge cases and missing values:
 
@@ -1032,7 +1033,7 @@ When using \JSON without a schema, there are no restrictions on the keys (field 
  
 A beautiful example of this in practice was given by Mike Dewar at the New York Open Statistical Programming Meetup on Jan. 12, 2012 \citep{jsonkeys}. In his talk he emphasizes to use \JSON keys only for \emph{names}, and not for \emph{data}. He refers to this principle as the ``golden rule'', and explains how he learned his lesson the hard way. In one of his early applications, timeseries data was encoded by using the epoch timestamp as the \JSON key. Therefore the keys are different each time the query is executed:
 
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
 [
   { "1325344443" : 124 },
@@ -1040,10 +1041,10 @@ A beautiful example of this in practice was given by Mike Dewar at the New York 
   { "1325344478" : 137 }
 ]
 \end{verbatim}
+\end{footnotesize}
+Even though being valid \JSON, dynamic keys as in the example above are likely to introduce trouble. Most software will have great difficulty processing these values if we can not specify the keys in the code. Moreover when documenting the API, either informally or formally using a schema language, we need to describe for each property in the data what the value means and is composed of. Thereby a client or consumer can implement code that interprets and process each element in the data in an appropriate manner. Both the documentation and interpretation of \JSON data rely on fixed keys with well defined meaning. Also note that the structure is difficult to extend in the future. If we want to add an additional property to each observation, the entire structure needs to change. In his talk, Dewar explains that life gets much easier when we switch to the following encoding:
 
- Even though being valid \JSON, dynamic keys as in the example above are likely to introduce trouble. Most software will have great difficulty processing these values if we can not specify the keys in the code. Moreover when documenting the API, either informally or formally using a schema language, we need to describe for each property in the data what the value means and is composed of. Thereby a client or consumer can implement code that interprets and process each element in the data in an appropriate manner. Both the documentation and interpretation of \JSON data rely on fixed keys with well defined meaning. Also note that the structure is difficult to extend in the future. If we want to add an additional property to each observation, the entire structure needs to change. In his talk, Dewar explains that life gets much easier when we switch to the following encoding:
-
-\footnotesize
+\begin{footnotesize}
 \begin{verbatim}
 [
   { "time": "1325344443" : "price": 124 },
@@ -1051,8 +1052,8 @@ A beautiful example of this in practice was given by Mike Dewar at the New York 
   { "time": "1325344478" : "price": 137 }
 ]
 \end{verbatim}
-
- This structure will play much nicer with existing software that assumes fixed keys. Moreover, the structure can easily be described in documentation, or captured in a schema. Even when we have no intention of writing documentation or a schema for a dynamic \JSON source, it is still wise to design the structure in such away that it \emph{could} be described by a schema. When the keys are fixed, a well chosen example can provide all the information required for the consumer to implement client code. Also note that the new structure is extensible: additional properties can be added to each observation without breaking backward compatibility.  
+\end{footnotesize}
+This structure will play much nicer with existing software that assumes fixed keys. Moreover, the structure can easily be described in documentation, or captured in a schema. Even when we have no intention of writing documentation or a schema for a dynamic \JSON source, it is still wise to design the structure in such away that it \emph{could} be described by a schema. When the keys are fixed, a well chosen example can provide all the information required for the consumer to implement client code. Also note that the new structure is extensible: additional properties can be added to each observation without breaking backward compatibility.  
 
 In the context of \R, consistency of keys is closely related to Wikcham's concept of \emph{tidy data} discussed earlier. Wickham states that the most common reason for messy data are column headers containing values instead of variable names. Column headers in tabular datasets become keys when converted to \JSON. Therefore, when headers are actually values, \JSON keys contain in fact data and can become unpredictable. The cure to inconsistent keys is almost always to tidy the data according to recommendations given by \cite{tidydata}. 
  
