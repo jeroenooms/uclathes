@@ -23,6 +23,7 @@
 \usepackage{rotating}
 
 %support for ascii art 
+\usepackage[utf8]{inputenc}
 \usepackage{pmboxdraw}
 
 %shorthand commands
