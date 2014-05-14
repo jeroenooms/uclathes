@@ -90,20 +90,13 @@ Then there are the countless members of the \texttt{R} community that generously
 \vitaitem   {2009} {M.S.~(Methodology and Statistics for Social and Behavioral Sciences), \emph{Cum Laude}, Utrecht University.}
 \vitaitem   {2009} {Teaching Assistant for Henk Kelderman, Upper division psychometrics, VU University Amsterdam.}
 \vitaitem   {2009 -- 2010} {Visiting Scholar, UCLA Department of Statistics.}
-\vitaitem   {2010 -- 2014} {Self-employed, development and consulting in statistical software for numerous organizations.}
-\vitaitem   {2010 -- 2014} {Co-organizer of Los Angeles R User Group.}
 \vitaitem   {2010 -- 2014} {Graduate Student Researcher, software development of embedded vizualisation in Ohmage software system, UCLA Center for Embedded Networked Sensing.}
+\vitaitem   {2010 -- 2014} {Co-organizer of Los Angeles R User Group.}
+\vitaitem   {2010 -- 2014} {Self-employed, development and consulting in statistical software for numerous organizations.}
 \vitaitem   {2013} {Visiting Scholar, consult and teach data journalism, Columbia School of Journalism.}
 \vitaitem   {2014} {Organizing committee of the international useR! 2014 conference, Los Angeles}
 
-                
-\publication    {\textsl{MADHOUS Reference Manual.}
-                Stanford University, Dean of Student Affairs
-                (Residential Education Division), 1978.
-                Technical documentation for the MADHOUS
-                software system used to assign students to
-                on-campus housing.}
-                
+
 \abstract{foo bar}
 
 \begin {document}

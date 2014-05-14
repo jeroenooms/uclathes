@@ -431,6 +431,12 @@
       }
       \ColumnRestore
    \fi\fi
+
+   %This is a hack by Jeroen cause I don't want to manually list publications
+   %Uncomment to activate
+   %\include{chapter-publications}
+   %%%%%%%%%    
+
    \renewcommand\arraystretch{\OldArrayStretch}
 }
 
