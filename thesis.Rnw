@@ -7,6 +7,9 @@
 %}
 %\makeatother
 
+%disable paragraph indentation
+\setlength{\parindent}{0pt}
+
 %useful packages
 \usepackage{url}
 \usepackage{xspace}
