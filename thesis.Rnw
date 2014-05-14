@@ -71,7 +71,7 @@
   \small
 }
 
-\title{Challenges of Scaling Embedded Scientific Computing}
+\title{Embedded Scientific Computing: A Scalable, Interoperable and Reproducible Approach to Statistical Software}
 \author{Jeroen Ooms}
 \department{Statistics}
 \degreeyear{2014}
@@ -107,7 +107,11 @@ Then there are the countless members of the \texttt{R} community that generously
 \vitaitem   {2014} {Organizing committee of the international useR! 2014 conference, Los Angeles}
 
 
-\abstract{foo bar}
+\abstract{
+
+Methods for scientific computing are traditionally implemented in specialized software packages assisting the statistician in all facets of the data analysis process. A single product typically includes a wealth of functionality to interactively manage, explore and analyze data, and often much more. However, increasingly many users and organizations wish to integrate statistical computing into third party software. Rather than working in a specialized statistical environment, methods to analyze and visualize data get incorporated into pipelines, web applications and big data infrastructures. This way of doing data analysis requires a different approach to statistical software which emphasizes interoperability and programmable interfaces rather than user interaction. We refer to this branch of computing as embedded scientific computing.
+
+}
 
 \begin {document}
 \makeintropages
