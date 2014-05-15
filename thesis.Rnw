@@ -71,7 +71,7 @@
   \small
 }
 
-\title{Embedded Scientific Computing: A Scalable, Interoperable and Reproducible Approach to Statistical Software}
+\title{Embedded Scientific Computing: A Scalable, Interoperable and Reproducible Approach to Statistical Software for Big Data and Open Science}
 \author{Jeroen Ooms}
 \department{Statistics}
 \degreeyear{2014}
