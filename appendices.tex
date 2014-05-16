@@ -205,12 +205,10 @@ When \R tries to allocate more memory than allowed, it will throw an error:
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: cannot allocate vector of size 76.3 Mb}}\begin{alltt}
-\hlstd{A} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{memtest}\hlstd{(),} \hlkwc{RLIMIT_AS} \hlstd{=} \hlnum{500} \hlopt{*} \hlnum{1024} \hlopt{*} \hlnum{1024}\hlstd{)}
-\end{alltt}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: cannot allocate vector of size 76.3 Mb}}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\end{kframe}
+\end{kframe}
 \end{knitrout}
 
 
@@ -248,15 +246,13 @@ kill the process after 5 seconds:
 \hlkwd{system.time}\hlstd{(x} \hlkwb{<-} \hlkwd{eval.secure}\hlstd{(}\hlkwd{cputest}\hlstd{(),} \hlkwc{RLIMIT_CPU} \hlstd{=} \hlnum{5}\hlstd{))}
 \end{alltt}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: R call did not return within 60 seconds. Terminating process.}}\begin{verbatim}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Terminating process.}}\begin{verbatim}
 ## Timing stopped at: 4.846 0.175 5.102
 \end{verbatim}
-\begin{alltt}
-\hlkwd{print}\hlstd{(x)}
-\end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'x' not found}}\end{kframe}
+
+\end{kframe}
 \end{knitrout}
 
 
