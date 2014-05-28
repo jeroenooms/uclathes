@@ -76,7 +76,7 @@
 \department{Statistics}
 \degreeyear{2014}
 
-\chair{Frederick Schoenberg}
+\chair{Frederick Paik Schoenberg}
 \chair{Mark Hansen}
 \member{Jan de Leeuw}
 \member{Mark Handcock}
@@ -131,10 +131,6 @@ Methods for scientific computing are traditionally implemented in specialized so
 
 %chapter 5
 \include{chapter5}
-
-%RAppArmor appendices
-\input{appendices}
-
 
 
 \end {document}

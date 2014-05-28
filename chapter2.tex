@@ -407,6 +407,5 @@ Because the data and sources of a statistical analysis include potentially sensi
 
 However, temporary keys do not have to be kept private per se: clients can choose to exchange keys with other clients. Unlike typical access tokens, the keys in \OpenCPU are unique for each request. Hence by publishing a particular key, the client reveals only the resources from a specific \RPC request, and no other confidential information. Resources in \OpenCPU are not tied to any particular user, in fact, there are no users in \OpenCPU system itself. Clients can share objects, graphics or files with each other, simply by communicating keys to these resources. Because each key holds both the output as well as the sources for an \RPC request, shared objects are reusable and reproducible by design. In some sense, all clients share a single universal namespace with keys containing hidden objects from all \RPC requests. By knowing a key to a particular resource it can be used as any other object on the system. This shapes the contours of a social analysis platform in which users collaborate by sharing reproducible, reusable resources identified by unique keys.
 
-
 \bibliographystyle{plainnat}
 \bibliography{thesis} 
