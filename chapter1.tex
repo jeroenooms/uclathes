@@ -26,8 +26,9 @@ It is in the interest of both the statistician and the scientific community that
 %However, if we decline our new to role as team player, the boat might leave without us. 
 However, we must also face our limitations. Modern data analysis involves technical challenges that are beyond our capabilities and require interdisciplinary collaboration. This changing reality asks for some reflection on what is the true strength of statistics and which tasks are perhaps better suited for other experts.
 
+\subsection{Current developments}
 
-\subsection{Size and scale}
+\subsubsection{Size and scale}
 
 Amongst the most visible recent developments are those related to scale. The rapid growth of data and the rise of computationally intensive methods have multiplied demand for computational power. Over the past years, estimation based on resampling or Monte Carlo techniques %\citep{efron1982jackknife}% 
 has steadily gained popularity over analytical solutions. 
@@ -40,13 +41,13 @@ that layer on Hadoop to implement natively distributed versions of statistical m
 Tools and techniques for data analysis originating from fields other than statistics are received with a mix of excitement, skepticism, and aversion that is dividing the community. However, it is absolutely critical to the survival of our discipline that statisticians join the big data movement and work with these new players to influence the next generation of analysis software.
 
 
-\subsection{Visualization}
+\subsubsection{Visualization}
 
 Alongside quantitative results such as averages and parameter estimates, another important device for inspecting data is provided by computer graphics. Statistical software packages typically include functionality to generate plots in some form or another. Implementations vary anywhere from low-level shape drawing to completely canned charts automatically included with particular analyses. For many years such graphing tools have provided a useful and popular complement to numerical methods in statistical software products. However visualization too has matured into its own field independent of statistical computing. Specialized programs and libraries have started to offer more powerful, flexible visualization capabilities than those found in statistical software, slowly taking away market share. 
 
 The definitive tipping point has been the introduction of advanced graphing capabilities \texttt{SVG}, \texttt{Canvas} and \texttt{WebGL} in web browsers as part of the \texttt{HTML5} standard in 2012. These technologies opened the door to high performance, vector based, interactive, and even \texttt{3D} visualization in web pages. They take advantage of dedicated languages for styling (\texttt{CSS}) and interaction (\texttt{JavaScript}) while leveraging a user base that literally includes the entire world. In very little time countless high quality open source \texttt{JavaScript} libraries have appeared that go far beyond traditional graphics. By taking advantage of internet access and the document object model (\texttt{DOM}), browser graphics introduce a new generation of visualizations including interactive maps, live data animation and data-driven documents \citep{bostock2011d3}. But even for implementing traditional static plots, the browser offers unprecedented flexibility and performance and which eventually replace other graphics devices.
 
-\subsection{Domain specialization}
+\subsubsection{Domain specialization}
 
 The rise of data and statistics has given birth to many new specializations and sub-fields. Over the past two decades much of the social sciences, including psychology and political science have transitioned from mostly qualitative towards quantitative methods, making measurement and analysis of behavior the main subject of research. Other applied branches like biostatistics and econometrics have long outgrown their respective disciplines and are supporting dedicated degrees and departments. In bioinformatics, entire schools are forming around various types of genomic data, such as DNA microarrays and \texttt{ChIP}-sequencing. More recently, even areas like literature and journalism are discovering data as a source of information. 
 These fields encounter data and problems of a different nature, but have already unveiled very promising applications. 
@@ -56,7 +57,7 @@ An important consequence of these developments is that analysts and their tools 
  
 
 
-\subsection{Socializing data analysis}
+\subsubsection{Socializing data analysis}
 
 A somewhat more cultural yet important trend in recent years has been the socializing of technology. Much of software innovation has shifted focus from optimizing ways in which users perform particular tasks towards improving communication and collaboration between people. One popular example is Github: a software hosting service with social networking features based on the revision control system \texttt{git} \citep{torvalds2010git}. Its excellent branching and merging tools enable distributed non-linear development by making it effortless to fork, prototype, contribute, review, discuss, and incorporate code between users and projects. This system has revolutionized code management for open-source projects and has proven to catalyze efficiency and creativity in the  development process. Many of the younger statistical software developers are already using Github or similar platforms to host and manage their scripts and packages. 
 
